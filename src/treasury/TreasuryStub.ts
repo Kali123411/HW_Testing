@@ -1,6 +1,6 @@
 // TreasuryStub.ts
 import { EventEmitter } from 'events'
-import type { IPaymentOutput } from '../../wasm/kaspa'
+import type { IPaymentOutput } from 'kaspa-wasm32-sdk'
 
 // Make sure it has the same interface as the real Treasury
 export default class TreasuryStub extends EventEmitter {
