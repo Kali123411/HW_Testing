@@ -1,26 +1,46 @@
-// RpcClientStub.ts
+import type { IBlock } from "../../../wasm/kaspa";
 
 export class RpcClientStub {
-  // Instead of actually connecting anywhere,
-  // this just returns immediately.
-  async connect() {
-    // no-op
-    return;
+  addEventListener(
+    eventName: string,
+    listener: (...args: any[]) => void
+  ): void {
+    // You could either do nothing:
+    // (no-op)
+    // Or simulate calling the listener after some delay to mimic events:
+    // setTimeout(() => {
+    //   listener(/* dummy args here */);
+    // }, 1000);
   }
 
-  // Return fake server info so the code doesn’t crash.
-  async getServerInfo() {
+  async getBlockTemplate(_args: {
+    payAddress: string;
+    extraData: string;
+  }): Promise<{ block: IBlock }> {
+    // Return a fake IBlock structure
     return {
-      isSynced: true,
-      hasUtxoIndex: true,
-      networkId: "testnet-11",
+      block: {
+        header: {
+          // Minimal required fields your code references:
+          hash: "stubbedHash",
+          nonce: BigInt(0),
+          timestamp: BigInt(Date.now()),
+          // etc.
+        },
+        // If your code references other fields, add them here
+      },
     };
   }
 
-  // If there are other methods the real RpcClient calls,
-  // just stub them out as well, e.g.:
-  async getBlockTemplate() {
-    // Return some dummy data
-    return {};
+  async submitBlock(_args: {
+    block: IBlock;
+    allowNonDAABlocks: boolean;
+  }): Promise<any> {
+    // Return a dummy "report" or success indicator
+    return { submitted: true };
+  }
+
+  async subscribeNewBlockTemplate(): Promise<void> {
+    // No-op
   }
 }
