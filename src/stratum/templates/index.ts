@@ -1,5 +1,5 @@
-import type { IBlock, RpcClient } from "kaspa-wasm"
-import { Header, PoW } from "kaspa-wasm"
+import type { IBlock, RpcClient } from "kaspa-wasm32-sdk"
+import { Header, PoW } from "kaspa-wasm32-sdk"
 import Jobs from "./jobs"
 
 export default class Templates {
