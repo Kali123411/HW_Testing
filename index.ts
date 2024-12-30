@@ -12,13 +12,13 @@ import { RpcClientStub } from "./src/RpcClientStub.ts";
 import TreasuryStub from "./src/treasury/TreasuryStub.ts";
 import StratumStub from "./src/stratum/StratumStub.ts";
 // NEW: import the TemplatesStub
-import TemplatesStub from "./src/stratum/templates/TemplatesStub.ts"; 
+import TemplatesStub from "./src/stratum/templates/TemplatesStub.ts";
 
 // Config
 import config from "./config.json";
 
 // Decide if we want to use stubs
-const USE_STUBS = true; // or check an env var, e.g. process.env.USE_STUBS === "true"
+const USE_STUBS = true; // or check an env var, e.g., process.env.USE_STUBS === "true"
 
 async function main() {
   // RPC
@@ -64,7 +64,7 @@ async function main() {
       rpc as RpcClient,
       // If the real Treasury exposes `treasury.address`, use that;
       // otherwise, use any appropriate address string
-      treasury.address ?? "real-address", 
+      treasury.address ?? "real-address",
       config.stratum.templates.cacheSize
     );
   } else {
@@ -80,7 +80,7 @@ async function main() {
   if (!USE_STUBS) {
     stratum = new Stratum(templates, config.stratum.port, config.stratum.difficulty);
   } else {
-    stratum = new StratumStub();
+    stratum = new StratumStub(config.stratum.port); // Pass port to the stub
   }
 
   // Pool
