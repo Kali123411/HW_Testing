@@ -1,7 +1,7 @@
 // index.ts (top-level entry point)
 
 // --- 1) Import REAL classes ---
-import { RpcClient, Encoding, Resolver } from "./wasm/kaspa";
+import { RpcClient, Encoding, Resolver } from "kaspa-wasm";
 import Treasury from "./src/treasury";
 import Templates from "./src/stratum/templates";
 import Stratum from "./src/stratum";
