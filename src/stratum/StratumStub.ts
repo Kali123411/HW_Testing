@@ -1,21 +1,26 @@
 // StratumStub.ts
-import { EventEmitter } from 'events'
+export default class StratumStub {
+  private connections: any[] = []; // Keep track of miners
 
-export default class StratumStub extends EventEmitter {
-  // If your code references `this.stratum.server.socket.port`,
-  // stub out a `.server.socket` property or use optional chaining in your code.
-  server = {
-    socket: { port: 12345 }
+  start(port: number) {
+    console.log(`StratumStub listening on port ${port}`);
   }
 
-  constructor() {
-    super()
-    // Possibly emit 'subscription' events if you want to simulate a miner connecting
-    // setTimeout(() => this.emit('subscription', '127.0.0.1', 'minerAgent'), 2000)
+  on(event: string, handler: Function) {
+    if (event === "subscription") {
+      console.log("New subscription handler registered.");
+      // Capture incoming subscriptions
+      this.connections.push(handler);
+    }
   }
 
-  dumpContributions() {
-    // Return empty or fake contributions
-    return []
+  sendJob(minerId: string, jobData: any) {
+    console.log(`Sending job to miner ${minerId}:`, jobData);
+  }
+
+  receiveShare(minerId: string, shareData: any) {
+    console.log(`Received share from miner ${minerId}:`, shareData);
+    // Optionally simulate success/failure:
+    return { valid: true, details: "Stubbed share accepted." };
   }
 }
