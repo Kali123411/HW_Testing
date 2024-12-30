@@ -11,12 +11,14 @@ import Pool from "./src/pool";
 import { RpcClientStub } from "./src/treasury/RpcClientStub";
 import TreasuryStub from "./src/treasury/TreasuryStub";
 import StratumStub from "./src/stratum/StratumStub";
+// NEW: import the TemplatesStub
+import TemplatesStub from "./src/stratum/templates/TemplatesStub"; 
 
 // Config
 import config from "./config.json";
 
 // Decide if we want to use stubs
-const USE_STUBS = true; // or check an env var: process.env.USE_STUBS === "true"
+const USE_STUBS = true; // or check an env var, e.g. process.env.USE_STUBS === "true"
 
 async function main() {
   // RPC
@@ -42,7 +44,7 @@ async function main() {
     serverInfo = await rpc.getServerInfo(); // returns dummy data
   }
 
-  // Treasury
+  // Treasury (real or stub)
   let treasury: Treasury | TreasuryStub;
   if (!USE_STUBS) {
     treasury = new Treasury(
@@ -55,14 +57,25 @@ async function main() {
     treasury = new TreasuryStub();
   }
 
-  // Templates (Optional):
-  // You can keep the real "Templates" class even in stub mode if you want,
-  // or create a TemplatesStub. We'll keep the real one for now:
-  const templates = new Templates(rpc as any, 
-                                  treasury.address ?? "stub-address", 
-                                  config.stratum.templates.cacheSize);
+  // Templates (real or stub)
+  let templates: Templates | TemplatesStub;
+  if (!USE_STUBS) {
+    templates = new Templates(
+      rpc as RpcClient,
+      // If the real Treasury exposes `treasury.address`, use that;
+      // otherwise, use any appropriate address string
+      treasury.address ?? "real-address", 
+      config.stratum.templates.cacheSize
+    );
+  } else {
+    templates = new TemplatesStub(
+      // For the stub, we can use the same or a fake address
+      treasury.address ?? "stub-address",
+      config.stratum.templates.cacheSize
+    );
+  }
 
-  // Stratum
+  // Stratum (real or stub)
   let stratum: Stratum | StratumStub;
   if (!USE_STUBS) {
     stratum = new Stratum(templates, config.stratum.port, config.stratum.difficulty);
@@ -74,7 +87,7 @@ async function main() {
   const pool = new Pool(treasury as any, stratum as any);
 
   // Just to prove it's running:
-  console.log("Pool is initialized with stubs =", USE_STUBS);
+  console.log("Pool is initialized. USE_STUBS =", USE_STUBS);
 }
 
 main().catch((err) => console.error(err));
