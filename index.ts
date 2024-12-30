@@ -81,6 +81,7 @@ async function main() {
     stratum = new Stratum(templates, config.stratum.port, config.stratum.difficulty);
   } else {
     stratum = new StratumStub(config.stratum.port); // Pass port to the stub
+    stratum.start(); // Explicitly start the stub server
   }
 
   // Pool
