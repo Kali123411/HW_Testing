@@ -72,6 +72,13 @@ export default class StratumStub {
           result: true,
           error: null,
         });
+      } else if (message.method === "mining.submit") {
+        console.log(`Miner ${minerId} submitted a share:`, message.params);
+        this.sendResponse(minerId, {
+          id: message.id,
+          result: true,
+          error: null,
+        });
       } else {
         console.log(`Unknown message from miner ${minerId}:`, message);
       }
