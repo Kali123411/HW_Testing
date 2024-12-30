@@ -1,7 +1,7 @@
 // src/stratum/templates/TemplatesStub.ts
 
-import { IBlock } from "kaspa-wasm";
-import { Header, PoW } from "kaspa-wasm";
+import { IBlock } from "kaspa-wasm32-sdk";
+import { Header, PoW } from "kaspa-wasm32-sdk";
 import Jobs from "./jobs";
 
 /**
