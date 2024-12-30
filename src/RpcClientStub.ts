@@ -1,4 +1,4 @@
-import type { IBlock } from "../../../wasm/kaspa";
+import type { IBlock } from "../../../kaspa-wasm";
 
 export class RpcClientStub {
   addEventListener(
