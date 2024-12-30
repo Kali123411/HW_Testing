@@ -1,6 +1,25 @@
 import type { IBlock } from "kaspa-wasm32-sdk";
 
 export class RpcClientStub {
+  // Added a no-op async connect() method
+  async connect(): Promise<void> {
+    // no operation in the stub
+    return;
+  }
+
+  // Added a getServerInfo() method returning dummy data
+  async getServerInfo(): Promise<{
+    isSynced: boolean;
+    hasUtxoIndex: boolean;
+    networkId: string;
+  }> {
+    return {
+      isSynced: true,
+      hasUtxoIndex: true,
+      networkId: "testnet-11",
+    };
+  }
+
   addEventListener(
     eventName: string,
     listener: (...args: any[]) => void
