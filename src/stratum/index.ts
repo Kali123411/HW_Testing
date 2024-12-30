@@ -4,7 +4,7 @@ import { randomBytes } from 'crypto'
 import Server, { type Miner, type Worker } from './server'
 import { type Request, type Response, type Event, errors } from './server/protocol'
 import type Templates from './templates/index.ts'
-import { calculateTarget, Address } from "../../kaspa-wasm"
+import { calculateTarget, Address } from "kaspa-wasm"
 import { Encoding, encodeJob } from './templates/jobs/encoding.ts'
 
 export default class Stratum extends EventEmitter {
