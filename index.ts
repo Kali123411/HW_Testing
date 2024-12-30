@@ -8,7 +8,7 @@ import Stratum from "./src/stratum";
 import Pool from "./src/pool";
 
 // --- 2) Import STUB classes ---
-import { RpcClientStub } from "./src/treasury/RpcClientStub.ts";
+import { RpcClientStub } from "./src/RpcClientStub.ts";
 import TreasuryStub from "./src/treasury/TreasuryStub.ts";
 import StratumStub from "./src/stratum/StratumStub.ts";
 // NEW: import the TemplatesStub
