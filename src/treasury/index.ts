@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import { PrivateKey, UtxoProcessor, UtxoContext, type RpcClient, type IPaymentOutput, createTransactions } from "../../wasm/kaspa"
+import { PrivateKey, UtxoProcessor, UtxoContext, type RpcClient, type IPaymentOutput, createTransactions } from "../../kaspa-wasm"
 
 export default class Treasury extends EventEmitter {
   privateKey: PrivateKey
