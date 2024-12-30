@@ -2,7 +2,7 @@ import type Treasury from '../treasury'
 import type Stratum from '../stratum'
 import Database from './database'
 import Monitoring from './monitoring'
-import { sompiToKaspaStringWithSuffix, type IPaymentOutput } from "kaspa-wasm"
+import { sompiToKaspaStringWithSuffix, type IPaymentOutput } from "kaspa-wasm32-sdk"
 
 export default class Pool {
   private treasury: Treasury
