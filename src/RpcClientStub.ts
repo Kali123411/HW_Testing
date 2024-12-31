@@ -85,7 +85,7 @@ export class RpcClientStub {
     const blockTemplate = {
       block: {
         header: {
-          hash: "deadbeefdeadbeefdeadbeefdeadbeef",
+          hash: "stubbedHash",
           nonce: BigInt(0),
           timestamp: BigInt(Date.now()),
           difficulty: FIXED_DIFFICULTY, // Set fixed difficulty
