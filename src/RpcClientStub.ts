@@ -1,7 +1,7 @@
 import type { IBlock } from "kaspa-wasm32-sdk";
 
 // Define a fixed difficulty constant
-const FIXED_DIFFICULTY = "0000000ffffffffffffffffffffffffffffffffffffffffffffffffffff"; // Example difficulty
+const FIXED_DIFFICULTY = "deadbeefdeadbeefdeadbeefdeadbeef"; // Example difficulty
 
 export class RpcClientStub {
   constructor() {
